@@ -1,0 +1,27 @@
+language: php
+
+php:
+  - 5.6
+  - 7.0
+  - 7.1
+
+env:
+  - SYMFONY_VERSION=2.8 JSONSCHEMA_VERSION=~5.2
+  - SYMFONY_VERSION=3.0 JSONSCHEMA_VERSION=~5.2
+  - SYMFONY_VERSION=3.1 JSONSCHEMA_VERSION=~5.2
+  - SYMFONY_VERSION=3.2 JSONSCHEMA_VERSION=~5.2
+  - SYMFONY_VERSION=3.3 JSONSCHEMA_VERSION=~5.2
+  - SYMFONY_VERSION=dev-master JSONSCHEMA_VERSION=~5.2
+
+before_script:
+  - composer self-update
+  - composer require symfony/symfony:${SYMFONY_VERSION}
+  - composer require justinrainbow/json-schema:${JSONSCHEMA_VERSION}
+
+script: vendor/bin/phpunit --coverage-text
+
+
+matrix:
+  allow_failures:
+    - env: SYMFONY_VERSION=dev-master JSONSCHEMA_VERSION=~5.2
+
