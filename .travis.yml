@@ -18,7 +18,11 @@ before_script:
   - composer require symfony/symfony:${SYMFONY_VERSION}
   - composer require justinrainbow/json-schema:${JSONSCHEMA_VERSION}
 
-script: vendor/bin/phpunit --coverage-text
+script:
+  - ./vendor/bin/phpunit -v
+
+after_script:
+  - ./vendor/bin/coveralls -v
 
 
 matrix:
